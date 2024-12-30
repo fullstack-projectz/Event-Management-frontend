@@ -7,6 +7,7 @@ const Dashboard = () => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -47,18 +48,23 @@ const Dashboard = () => {
 
     const handleDelete = async (eventId) => {
         const token = localStorage.getItem('userToken');
-        try {
-            await axios.delete(
-                `https://event-management-backend-oilv.onrender.com/api/users/events/${eventId}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            setEvents(events.filter((event) => event._id !== eventId));
-        } catch (err) {
-            setError('Failed to delete event. Please try again later.');
+        const isConfirmed = window.confirm('Are you sure you want to delete this event?'); // Show confirmation prompt
+
+        if (isConfirmed) {
+            try {
+                await axios.delete(
+                    `https://event-management-backend-oilv.onrender.com/api/users/events/${eventId}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                setEvents(events.filter((event) => event._id !== eventId));
+                setSuccessMessage('Event deleted successfully!'); // Set success message
+            } catch (err) {
+                setError('Failed to delete event. Please try again later.');
+            }
         }
     };
 
@@ -81,6 +87,14 @@ const Dashboard = () => {
                 <div className="bg-white shadow-md rounded-lg p-6">
                     <h2 className="text-2xl font-semibold">Welcome, {user.name}!</h2>
                     <h3 className="text-xl font-semibold mt-4">Your Created Events:</h3>
+
+                    {/* Show success message if any */}
+                    {successMessage && (
+                        <div className="bg-green-500 text-white p-4 mb-4 rounded">
+                            {successMessage}
+                        </div>
+                    )}
+
                     {events.length > 0 ? (
                         <ul className="space-y-4 mt-4">
                             {events.map((event) => (
