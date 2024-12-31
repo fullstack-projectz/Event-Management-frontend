@@ -40,7 +40,6 @@ function Navbar() {
                             <Link to="/events" className="hover:text-gray-200">Events</Link>
                         </li>
 
-                        {/* Show user/admin-specific links */}
                         {!isLoggedIn && (
                             <>
                                 <li>
@@ -60,7 +59,7 @@ function Navbar() {
                                     </li>
                                 ) : (
                                     <li>
-                                        <Link to="/user/dashboard" className="hover:text-gray-200">Dashboard</Link>
+                                        <Link to="/dashboard" className="hover:text-gray-200">Dashboard</Link>
                                     </li>
                                 )}
                                 <li>
