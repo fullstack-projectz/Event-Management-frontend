@@ -22,7 +22,7 @@ const CreateEvent = () => {
         }
 
         try {
-            const response = await axios.post(
+            await axios.post(
                 'https://event-management-backend-oilv.onrender.com/api/users/events',
                 { title, description, date, location, hour },
                 {

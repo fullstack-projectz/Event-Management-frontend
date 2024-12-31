@@ -39,11 +39,12 @@ function Navbar() {
                         <li>
                             <Link to="/events" className="hover:text-gray-200">Events</Link>
                         </li>
-                        
+
+                        {/* Show user/admin-specific links */}
                         {!isLoggedIn && (
                             <>
                                 <li>
-                                    <Link to="/user/login" className="hover:text-gray-200">Login</Link>
+                                    <Link to="/user/login" className="hover:text-gray-200">User Login</Link>
                                 </li>
                                 <li>
                                     <Link to="/admin/login" className="hover:text-gray-200">Admin Login</Link>
@@ -51,12 +52,17 @@ function Navbar() {
                             </>
                         )}
 
-                        {/* Show dashboard and logout if logged in */}
                         {isLoggedIn && (
                             <>
-                                <li>
-                                    <Link to="/dashboard" className="hover:text-gray-200">Dashboard</Link>
-                                </li>
+                                {isAdmin ? (
+                                    <li>
+                                        <Link to="/admin/dashboard" className="hover:text-gray-200">Admin Dashboard</Link>
+                                    </li>
+                                ) : (
+                                    <li>
+                                        <Link to="/user/dashboard" className="hover:text-gray-200">Dashboard</Link>
+                                    </li>
+                                )}
                                 <li>
                                     <button onClick={handleLogout} className="hover:text-gray-200">Logout</button>
                                 </li>
