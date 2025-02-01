@@ -20,6 +20,7 @@ export default function AddEvent() {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // Loading state
 
   // Image upload handler
   const handleImageUpload = (e) => {
@@ -59,6 +60,8 @@ export default function AddEvent() {
 
     if (!validateForm()) return;
 
+    setLoading(true); // Set loading to true when submitting
+
     const eventData = new FormData();
     eventData.append("owner", formData.owner);
     eventData.append("title", formData.title);
@@ -91,11 +94,15 @@ export default function AddEvent() {
           location: "",
           ticketPrice: "",
           image: null,
-          likes: ''
+          likes: '',
         });
       })
       .catch((error) => {
         console.error("Error posting event:", error);
+        alert("Failed to create event. Please try again.");
+      })
+      .finally(() => {
+        setLoading(false); 
       });
   };
 
@@ -220,8 +227,12 @@ export default function AddEvent() {
           </label>
 
           {/* Submit Button */}
-          <button className="primary" type="submit">
-            Submit
+          <button
+            className="primary"
+            type="submit"
+            disabled={loading} // Disable button when loading
+          >
+            {loading ? "Submitting..." : "Submit"} {/* Show loading text when submitting */}
           </button>
         </div>
       </form>

@@ -15,7 +15,7 @@ export default function IndexPage() {
 
     axios
       .get("/createEvent")
-      .then((response) => {
+      .then((response) => {    
         setEvents(response.data);
       })
       .catch((error) => {
@@ -27,7 +27,7 @@ export default function IndexPage() {
   const handleLike = (eventId) => {
     axios
       .post(`/event/${eventId}`)
-      .then((response) => {
+      .then((response) => {        
         setEvents((prevEvents) =>
           prevEvents.map((event) =>
             event._id === eventId
@@ -55,12 +55,14 @@ export default function IndexPage() {
         <div className="mx-10 my-5 grid gap-x-6 gap-y-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:mx-5 ">
 
           {/*-------------------------- Checking whether there is a event or not-------------------  */}
-          {events.length > 0 && events.map((event) => {
+          {events.length > 0 && events.map((event) => {  
             const eventDate = new Date(event.eventDate);
             const currentDate = new Date();
 
             //! Check the event date is passed or not --------------------------------------------------------------------------------------- 
             if (eventDate > currentDate || eventDate.toDateString() === currentDate.toDateString()) {
+              console.log(event);
+              
               return (
                 <div className="bg-white rounded-xl relative" key={event._id}>
                   <div className='rounded-tl-[0.75rem] rounded-tr-[0.75rem] rounded-br-[0] rounded-bl-[0] object-fill aspect-16:9'>
@@ -115,4 +117,4 @@ export default function IndexPage() {
     </>
 
   )
-}
+};
