@@ -2,6 +2,8 @@
 import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import signuppicImg from "../assets/signuppic.svg";
+import heroImg from "../assets/hero.jpg";
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -45,12 +47,12 @@ export default function RegisterPage() {
         <div className="text-3xl font-black">Welcome to</div>
 
           <div>
-            <img src="../src/assets/logo.png" alt="" className="w-48"/>
+            <img src={heroImg} alt="" className="w-48"/>
           </div>  
         </div>
 
         <div className="ml-48 w-80 mt-6">
-        <img src="../src/assets/signuppic.svg" alt="" className='w-full'/>
+        <img src={signuppicImg} alt="" className='w-full'/>
         </div>   
       
     </div>
