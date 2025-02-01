@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import { RxExit } from 'react-icons/rx';
 import { BsFillCaretDownFill } from 'react-icons/bs';
-import heroImg from '../assets/hero.jpg';
+import logImg from '../assets/logo.png';
 
 export default function Header() {
   const { user, setUser } = useContext(UserContext);
@@ -52,7 +52,7 @@ export default function Header() {
     <div>
       <header className='flex py-2 px-6 sm:px-6 justify-between place-items-center'>
         <Link to={'/'} className="flex item-center ">
-          <img src={heroImg} alt="" className='w-26 h-9' />
+          <img src={logImg} alt="" className='w-26 h-9' />
         </Link>
         <div className='flex bg-white rounded py-2.5 px-4 w-1/3 gap-4 items-center shadow-md shadow-gray-200'>
           <button>
